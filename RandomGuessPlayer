@@ -1,11 +1,10 @@
-package player;
+﻿package player;
 
 import java.util.Random;
 
 import java.util.Scanner;
 import world.World;
-import ²âÊÔ.List.Coordinate;
-import ²âÊÔ.List.ShipLocation;
+
 
 /**
  * Random guess player (task A).
