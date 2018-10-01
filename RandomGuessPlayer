@@ -15,9 +15,21 @@ import ²âÊÔ.List.ShipLocation;
  */
 public class RandomGuessPlayer implements Player{
 
+
+ private World world;
+ private ArrayList<Guess> newGuess=new ArrayList<Guess>();
     @Override
     public void initialisePlayer(World world) {
-        // To be implemented.
+      this.world=world;
+      for(int i=0;i<world.numRow;i++)
+      {
+      for(int j=0;j<world.numColumn;j++)
+      {
+        g.row = i;
+                g.column = j;
+                newGuess.add(g);
+      }
+      }
     } // end of initialisePlayer()
 
     @Override
@@ -53,18 +65,11 @@ public class RandomGuessPlayer implements Player{
 
     @Override
     public Guess makeGuess() {
-    	Guess g1 = new Guess();
-    	Random rand = new Random();
-  	  
-  	   g1.row=rand.nextInt(10);
-  	 g1.column=rand.nextInt(10);
-  	 
-  	  
-
-        // To be implemented.
-
-        // dummy return
-        return g1;
+    //Generating Random number
+    	int random=(int)(Math.random() * (newGuess.size() - 1));
+        //removing the current Guess from the newGuess ArrayList
+        return newGuess.remove(random)
+        
     } // end of makeGuess()
 
 
