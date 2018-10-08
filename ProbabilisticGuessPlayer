@@ -2,7 +2,6 @@ package player;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import ship.Ship;
 import world.World;
 
@@ -12,14 +11,37 @@ import world.World;
  *
  * @author Youhan Xia, Jeffrey Chan
  */
+
 public class ProbabilisticGuessPlayer  implements Player{
+	private enum Mode {
+	    HUNT, TARGET
+	}
+
 	private World world;
+	private ArrayList<Guess> old_Guesses = new ArrayList<Guess>();
+	private ArrayList<Ship> enemy_Ships = new ArrayList<Ship>();
+	private int[][] shipConfigs;
+	private Mode mode = Mode.HUNT;
+	//ArrayList to find the next consecutive guesses
+	private ArrayList<Guess> nextGuess = new ArrayList<Guess>();
+	
 	//Array List for already made guesses
     private ArrayList<Guess> madeGuesses = new ArrayList<Guess>();
     private ArrayList<Ship> enemyShips = new ArrayList<Ship>();
     @Override
     public void initialisePlayer(World world) {
-        // To be implemented.
+       this.world=world;
+       shipConfigs = new int[world.numRow][world.numColumn];
+
+ 
+       for(World.ShipLocation sl : world.shipLocations)
+       {
+           enemyShips.add(sl.ship);
+       }
+
+       // Calculate initial number of ship configs
+       calcShipConfigs();
+       
     } // end of initialisePlayer()
 
     @Override
