@@ -1,9 +1,11 @@
-﻿package player;
-
+package player;
+import java.util.ArrayList;
 import java.util.Random;
 
 import java.util.Scanner;
 import world.World;
+import world.World.Coordinate;
+import world.World.ShipLocation;
 
 
 /**
@@ -24,6 +26,7 @@ public class RandomGuessPlayer implements Player{
       {
       for(int j=0;j<world.numColumn;j++)
       {
+    	  Guess g=new Guess();
         g.row = i;
                 g.column = j;
                 newGuess.add(g);
@@ -47,7 +50,7 @@ public class RandomGuessPlayer implements Player{
           			a1.isHit=true;
           		 }
           		 else{
-          			a1.isHit = false
+          			a1.isHit = false;
           		 }
           	 }
           	 else{
@@ -67,7 +70,7 @@ public class RandomGuessPlayer implements Player{
     //Generating Random number
     	int random=(int)(Math.random() * (newGuess.size() - 1));
         //removing the current Guess from the newGuess ArrayList
-        return newGuess.remove(random)
+        return newGuess.remove(random);
         
     } // end of makeGuess()
 
@@ -80,10 +83,15 @@ public class RandomGuessPlayer implements Player{
 
     @Override
     public boolean noRemainingShips() {
-        // To be implemented.
-
-        // dummy return
-        return true;
+       if(world.shipLocations.isEmpty())
+       {
+       return true;
+       }
+else
+{
+   return false; 
+    }
+        
     } // end of noRemainingShips()
 
 } // end of class RandomGuessPlayer
