@@ -1,0 +1,308 @@
+package player;
+
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.Scanner;
+import world.World;
+
+
+
+
+
+import world.World;
+import java.util.Scanner;
+
+import world.World.Coordinate;
+import world.World.ShipLocation;
+/**
+ * Greedy guess player (task B).
+ * Please implement this class.
+ *
+ * @author Youhan Xia, Jeffrey Chan
+ */
+public class GreedyGuessPlayer  implements Player{
+int key=0;
+public ArrayList<keyshot> kshot = new ArrayList<>()
+public class keyshot{
+	public int krow;
+	public int kcolumn;
+	
+}
+
+
+
+    @Override
+    
+    
+    public void initialisePlayer(World world) {
+    	
+        }
+    	
+    	// To be implemented.
+    } // end of initialisePlayer()
+
+    @Override
+    public Answer getAnswer(Guess guess) {
+        // To be implemented.
+
+        // dummy return
+        return null;
+    } // end of getAnswer()
+
+
+    @Override
+    public Guess makeGuess() {
+    	
+        Guess g1 = new Guess();
+    	Random rand = new Random();
+  	  World list= new World();
+    	keyshot k = new Keyshot();
+    	//rr==lr(last shot)
+    	//rc==lc(last shot)
+    	if(key!=0){
+    	int rc=kshot.get(kshot.size()-1).kcolumn;
+		int rr=kshot.get(kshot.size()-1).krow;
+    	}
+		
+		
+		if(key==1){
+    		int tr=rr;
+    		int tc=rc+1;
+    	
+    		if(0<tr<9&&0<tc<9){
+    			tr=rr-1;
+    			tc=rc;
+    			if(0<tr<9&&0<tc<9){
+    				tr=rr;
+    				tc=rc-1;
+    				key=0;
+    			}
+    			else{
+    				g1.row=tr;
+            		g1.column=tc;
+            		key=key+2;
+    			}
+    		}
+    		else{
+    			g1.row=tr;
+        		g1.column=tc;
+        		key++;
+    		}
+    		
+    	}
+    	
+    	if(key==2){
+    		int tr=rr-1;
+    		int tc=rc;
+    		if(0<tr<9&&0<tc<9){
+    			tr=rr;
+    			tc=rc-1;
+    			if(0<tr<9&&0<tc<9){
+    				//
+    				//
+    				key=0;
+    				World w2= new World();
+    	    		Coordinate a= w2.new Coordinate();
+    	    		boolean pass=false;
+    	    		boolean num=false;
+    	    	while(!num){
+    	  		  g1.row=rand.nextInt(10);
+    	  		g1.column=rand.nextInt(10);
+    	  		  if (g1.row%2==0&&g1.column%2!=0){
+	  		    	
+    	  		    	while(!pass){
+    	  			 a.row = g1.row;
+    	  		     a.column = g1.column;
+    	  		     if (w2.shots.contains(a)) {
+    	  		        pass=false;
+    	  		     }
+    	  		     else{
+    	  		    	 pass=true;
+    	  		     }
+    	  		    	}
+	  				     num=true;
+    	  			  }
+    	  			  else{
+    	  				num=false;
+    	  			  }
+    	 		  }
+    	  		  
+    	  	  }
+    				//
+    			}
+    		}
+    		else{
+    			g1.row=tr;
+    			g1.column=tc;
+    			key++;
+    		}
+    	
+    	
+    	
+    	if(key==3){
+    		int tr=rr;
+    		int tc=rc-1;
+    		if(0<tr<9&&0<tc<9){
+    			//
+				//
+				key=0;
+				World w2= new World();
+	    		Coordinate a= w2.new Coordinate();
+	    		boolean pass=false;
+	    		boolean num=false;
+	    	while(!num){
+	  		  g1.row=rand.nextInt(10);
+	  		g1.column=rand.nextInt(10);
+	  		  if (g1.row%2==0&&g1.column%2!=0){
+  		    	
+	  		    	while(!pass){
+	  			 a.row = g1.row;
+	  		     a.column = g1.column;
+	  		     if (w2.shots.contains(a)) {
+	  		        pass=false;
+	  		     }
+	  		     else{
+	  		    	 pass=true;
+	  		     }
+	  		    	}
+  				     num=true;
+	  			  }
+	  			  else{
+	  				num=false;
+	  			  }
+	 		  }
+	  		  
+	  	  }
+    		//
+    	}
+	
+    	else{
+    	try{
+  	int lc=list.shots.get(list.shots.size()-1).column;
+  	int lr=list.shots.get(list.shots.size()-1).row;
+    	}
+    	catch(Exception e){
+    		
+    	}
+  			//analysis the if the last shot hit the ship
+    	boolean hit=false;
+  	for (ShipLocation shipLoc : list.shipLocations) {
+        for (Coordinate cdn : shipLoc.coordinates) {
+      	 if(lr==cdn.row)
+      	 {
+      		 if(lc==cdn.column){
+      			hit=true;
+      			k.kcolumn=lc;
+      			k.krow=lr;
+      			kshot.add(k);
+      		 }
+      		 else{
+      			hit = false
+      		 }
+      	 }
+      	 else{
+      		hit = false;
+      	 }
+        }
+        }
+      	 
+       
+    	
+    	
+    	
+    	if(hit){
+    	int tr=lr+1;
+        int tc=lc;
+    		if(0<tr<9&&0<tc<9){
+    			tr=lr;
+        		tc=lc+1;
+        		
+        		if(0<tr<9&&0<tc<9){
+        			tr=lr-1;
+            		tc=lc;
+            		key=key+3;
+            		g1.row=tr;
+            		g1.column=tc;
+        		}
+        		else
+        		{
+        			g1.row=tr;
+        			g1.column=tc;
+        			key=key+2;
+        			
+        		}
+    		}
+        		else{
+        			g1.row=tr;
+        			g1.column=tc;
+        			key++;
+        		}
+    		}
+    		
+    		
+    	
+    	else{
+    		World w2= new World();
+    		Coordinate a= w2.new Coordinate();
+    		boolean pass=false;
+    		boolean num=false;
+    	while(!num){
+  		  g1.row=rand.nextInt(10);
+  		g1.column=rand.nextInt(10);
+  		  if (g1.row%2==0&&g1.column%2!=0){
+  			
+  			  
+  				  
+  			   
+  		    	
+  		    	while(!pass){
+  		  	   
+
+  			 a.row = g1.row;
+  		     a.column = g1.column;
+  		     if (w2.shots.contains(a)) {
+  		        pass=false;
+  		     }
+  		     else{
+  		    	 pass=true;
+  		     }
+  		    	}
+  				  
+  				  
+  				  
+  				  num=true;
+  			  }
+  			  else{
+  				num=false;
+  			  }
+ 		  }
+  		  
+  	  }
+  	  
+    	}
+  	  
+  	  
+  	  return g1;
+    } // end of makeGuess()
+
+
+    @Override
+    public void update(Guess guess, Answer answer) {
+        // To be implemented.
+    } // end of update()
+
+
+    @Override
+    public boolean noRemainingShips() {
+        if(world.shipLocations.isEmpty())
+        {
+        return true;
+        }
+ else
+ {
+    return false; 
+     }
+        
+    } // end of noRemainingShips()
+
+} // end of class GreedyGuessPlayer
